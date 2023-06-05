@@ -3,8 +3,9 @@ package api
 import (
 	"acv/util"
 	"acv/webSocket"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Id id结构体
@@ -22,7 +23,7 @@ func Connect(c *gin.Context) {
 	}
 
 	// 生成id
-	id := util.RandomString(10)
+	id := util.GenerateLinkId()
 
 	// 将id和连接放入map
 	webSocket.IdConnMap[id] = conn
