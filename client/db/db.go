@@ -1,13 +1,15 @@
 package db
 
 import (
+	"acv/model"
 	"context"
 	"fmt"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 	"os"
 	"reflect"
 	"time"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 // DbEngine 数据库对象
@@ -47,7 +49,7 @@ func InitDB() {
 			panic(any("Database error"))
 		}
 		var temp []interface{}
-		temp = append(temp)
+		temp = append(temp, &model.User{}, &model.File{})
 		CreateTableIfNotExist(DbEngine, temp)
 		sqlDB.SetMaxIdleConns(10)
 		sqlDB.SetMaxOpenConns(10000)

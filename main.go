@@ -1,6 +1,7 @@
 package main
 
 import (
+	"acv/client/db"
 	"acv/processQueue"
 	"acv/router"
 	"github.com/gin-gonic/gin"
@@ -16,7 +17,7 @@ func SettingUpEnvironment() {
 	// 配置端口
 	port = os.Getenv("ACV_PORT")
 	// 配置数据库
-	//db.InitDB()
+	db.InitDB()
 	// 初始化并运行任务队列
 	processQueue.InitQueue()
 }
