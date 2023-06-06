@@ -27,6 +27,7 @@ func main() {
 	SettingUpEnvironment()
 	// 初始化路由
 	r := gin.Default()
+	r.MaxMultipartMemory = 100 << 20
 	router.UseMyRouter(r)
 	des := ":" + port
 	_ = r.Run(des)

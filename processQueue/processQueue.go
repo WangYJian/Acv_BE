@@ -60,7 +60,7 @@ func (q *Queue) Process() {
 			file.Result = result
 			file.Update(db.DbEngine)
 			// 通知用户
-			notifyUser(job, job.File.Filename+result)
+			notifyUser(job, result)
 			// 删除任务
 			q.queueList.Remove(q.queueList.Front())
 		}
@@ -124,7 +124,7 @@ func NotifyUserByOrder(i int, iJob Job) {
 	}
 	msgStruct := msg{
 		Id:  iJob.Id,
-		Msg: iJob.File.Filename + content,
+		Msg: content,
 	}
 	_ = iJob.Conn.WriteJSON(msgStruct)
 }

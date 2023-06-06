@@ -13,6 +13,9 @@ func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.GetHeader("token")
 		if tokenString == "" {
+			tokenString = c.Query("token")
+		}
+		if tokenString == "" {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token header is missing"})
 			return
 		}

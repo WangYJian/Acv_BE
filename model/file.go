@@ -28,9 +28,9 @@ func CreateFile(db *gorm.DB, file File) error {
 }
 
 // GetFileByLinkID 函数将返回具有给定 ID 的文件。
-func GetFileByLinkID(db *gorm.DB, LinkIDd string) (File, error) {
+func GetFileByLinkID(db *gorm.DB, LinkID string) (File, error) {
 	var file File
-	result := db.First(&file, "link_id = ?", LinkIDd)
+	result := db.First(&file, "link_id = ?", LinkID)
 	if result.Error != nil {
 		return file, result.Error
 	}
@@ -45,4 +45,10 @@ func GetFilesByUserID(db *gorm.DB, userID string) ([]File, error) {
 		return nil, result.Error
 	}
 	return files, nil
+}
+
+// DeleteFileByLinkID DeleteFile 函数将删除具有给定 ID 的文件。
+func DeleteFileByLinkID(db *gorm.DB, LinkID string) error {
+	result := db.Delete(&File{}, "link_id = ?", LinkID)
+	return result.Error
 }
