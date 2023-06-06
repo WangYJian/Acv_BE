@@ -34,5 +34,10 @@ func UseMyRouter(r *gin.Engine) {
 			middleware.Auth(),
 			api.GetAudioFile,
 		)
+		// 删除音频文件
+		acvApi.DELETE("/audio",
+			middleware.Auth(),
+			api.DeleteFile,
+		)
 	}
 }
