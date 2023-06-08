@@ -19,11 +19,6 @@ func UseMyRouter(r *gin.Engine) {
 			middleware.Auth(),
 			api.Upload,
 		)
-		// 连接
-		acvApi.GET("/connect",
-			middleware.Auth(),
-			api.Connect,
-		)
 		// 查看历史记录
 		acvApi.GET("/history",
 			middleware.Auth(),
@@ -38,6 +33,14 @@ func UseMyRouter(r *gin.Engine) {
 		acvApi.DELETE("/audio",
 			middleware.Auth(),
 			api.DeleteFile,
+		)
+	}
+	ws := r.Group("/ws")
+	{
+		// 连接
+		ws.GET("/connect",
+			middleware.Auth(),
+			api.Connect,
 		)
 	}
 }
