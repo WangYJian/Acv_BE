@@ -56,7 +56,12 @@ func Upload(c *gin.Context) {
 	}
 
 	// 将文件放入队列
-	processQueue.ProcessQueue.PushBack(params)
+	data := processQueue.Data{
+		LinkID:   params.Id,
+		Filename: params.File.Filename,
+		Conn:     params.Conn,
+	}
+	processQueue.ProcessQueue.PushBack(data)
 	fmt.Println(processQueue.ProcessQueue.GetQueue())
 	c.String(200, "%s 文件上传成功", params.File.Filename)
 }
